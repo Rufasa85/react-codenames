@@ -5,3 +5,7 @@
 	display: inline-block;
 	width:18%;
 }
+
+.red-card {
+	background-color: red;
+}
