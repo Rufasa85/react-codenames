@@ -15,12 +15,52 @@ function shuffleArray(array) {
 }
 
 shuffleArray(cardWords);
+var cardWordObjArr = [];
+
+
+for (var i = 0; i < cardWords.length; i++) {
+	let cardObj = {};
+	if (i===0) {
+		cardObj={
+			color:'black',
+			word: cardWords[i]
+		}
+	}
+	else if (i < 10) {
+		cardObj={
+			color:'blue',
+			word: cardWords[i]
+		}
+	}
+	else if (i === 10) {
+		cardObj={
+			color:'purple',
+			word: cardWords[i]
+		}
+	}
+	else if (i < 20) {
+		cardObj={
+			color:'red',
+			word: cardWords[i]
+		}
+	}
+	else {
+		cardObj={
+			color:'yellow',
+			word: cardWords[i]
+		}
+	}
+	cardWordObjArr.push(cardObj);
+}
+
+shuffleArray(cardWordObjArr);
 
 class App extends React.Component {
 	render() {
 		let words = [];
 		for (var i = 0; i < 25; i++) {
-			words.push(<Card word = {cardWords[i]} />)
+			let wordObj = cardWordObjArr[i]
+			words.push(<Card key = {i} color = {wordObj.color} word = {wordObj.word} />)
 		}
 		return  (
 			<div>
