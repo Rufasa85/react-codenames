@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {Card} from './Card.jsx';
+import {CodemasterBtn} from './CodemasterBtn.jsx';
 import {cardWords} from './wordList.js';
 
 
@@ -23,31 +24,36 @@ for (var i = 0; i < cardWords.length; i++) {
 	if (i===0) {
 		cardObj={
 			color:'black',
-			word: cardWords[i]
+			word: cardWords[i],
+			class: 'card'
 		}
 	}
 	else if (i < 10) {
 		cardObj={
 			color:'blue',
-			word: cardWords[i]
+			word: cardWords[i],
+			class: 'card'
 		}
 	}
 	else if (i === 10) {
 		cardObj={
 			color:'purple',
-			word: cardWords[i]
+			word: cardWords[i],
+			class: 'card'
 		}
 	}
 	else if (i < 20) {
 		cardObj={
 			color:'red',
-			word: cardWords[i]
+			word: cardWords[i],
+			class: 'card'
 		}
 	}
 	else {
 		cardObj={
 			color:'yellow',
-			word: cardWords[i]
+			word: cardWords[i],
+			class: 'card'
 		}
 	}
 	cardWordObjArr.push(cardObj);
@@ -56,15 +62,38 @@ for (var i = 0; i < cardWords.length; i++) {
 shuffleArray(cardWordObjArr);
 
 class App extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state =  {
+			words:cardWordObjArr
+		}
+		this.changeColor = this.changeColor.bind(this);
+		this.showColors = this.showColors.bind(this);
+	}
+
+	changeColor(e) {
+		let idx = e.target.id;
+		console.log(e.target);
+		this.state.words[idx]['class'] = this.state.words[idx]['color'] + '-card card';
+		this.setState({});
+	}
+
+	showColors() {
+		for (var i = 0; i < this.state.words.length; i++) {
+			this.state.words[i]['class'] = this.state.words[i]['color'] + '-card card';
+		}
+		this.setState({});
+	}
+
 	render() {
 		let words = [];
 		for (var i = 0; i < 25; i++) {
-			let wordObj = cardWordObjArr[i]
-			words.push(<Card key = {i} color = {wordObj.color} word = {wordObj.word} />)
+			let wordObj = this.state.words[i];
+			words.push(<Card key = {i} id = {i} class = {wordObj.class} clickHandler={this.changeColor} word = {wordObj.word} />)
 		}
 		return  (
 			<div>
-				<h1> This is React</h1>
+				<h1> This is React <CodemasterBtn clickHandler={this.showColors}/></h1>
 					{words}
 			</div>
 			)
