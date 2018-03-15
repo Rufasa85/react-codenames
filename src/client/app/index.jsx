@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {Card} from './Card.jsx';
 import {CodemasterBtn} from './CodemasterBtn.jsx';
+import {PlayerBtn} from './PlayerBtn.jsx';
 import {cardWords} from './wordList.js';
 
 
@@ -32,28 +33,32 @@ for (var i = 0; i < cardWords.length; i++) {
 		cardObj={
 			color:'blue',
 			word: cardWords[i],
-			class: 'card'
+			class: 'card',
+			clicked:false
 		}
 	}
 	else if (i === 10) {
 		cardObj={
 			color:'purple',
 			word: cardWords[i],
-			class: 'card'
+			class: 'card',
+			clicked:false
 		}
 	}
 	else if (i < 20) {
 		cardObj={
 			color:'red',
 			word: cardWords[i],
-			class: 'card'
+			class: 'card',
+			clicked:false
 		}
 	}
 	else {
 		cardObj={
 			color:'yellow',
 			word: cardWords[i],
-			class: 'card'
+			class: 'card',
+			clicked:false
 		}
 	}
 	cardWordObjArr.push(cardObj);
@@ -69,18 +74,29 @@ class App extends React.Component {
 		}
 		this.changeColor = this.changeColor.bind(this);
 		this.showColors = this.showColors.bind(this);
+		this.hideColors = this.hideColors.bind(this);
 	}
 
 	changeColor(e) {
 		let idx = e.target.id;
 		console.log(e.target);
 		this.state.words[idx]['class'] = this.state.words[idx]['color'] + '-card card';
+		this.state.words[idx]['clicked'] = true;
 		this.setState({});
 	}
 
 	showColors() {
 		for (var i = 0; i < this.state.words.length; i++) {
 			this.state.words[i]['class'] = this.state.words[i]['color'] + '-card card';
+		}
+		this.setState({});
+	}
+
+	hideColors() {
+		for (var i = 0; i < this.state.words.length; i++) {
+			if (!this.state.words[i]['clicked']) {
+				this.state.words[i]['class'] = 'card';
+			}
 		}
 		this.setState({});
 	}
@@ -93,7 +109,7 @@ class App extends React.Component {
 		}
 		return  (
 			<div>
-				<h1> This is React <CodemasterBtn clickHandler={this.showColors}/></h1>
+				<h1> This is React <CodemasterBtn clickHandler={this.showColors}/><PlayerBtn clickHandler={this.hideColors}/></h1>
 					{words}
 			</div>
 			)
