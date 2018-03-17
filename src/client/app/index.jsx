@@ -95,8 +95,12 @@ class App extends React.Component {
 
 	changeColor(e) {
 		let idx = e.target.id;
+		let colorScore = this.state.words[idx]['color'] + 'Score' ;
 		console.log(e.target);
 		this.state.words[idx]['class'] = this.state.words[idx]['color'] + '-card card';
+		if (!this.state.words[idx]['clicked']) {
+			this.state[colorScore]= this.state[colorScore] - 1;
+		}
 		this.state.words[idx]['clicked'] = true;
 		this.setState({});
 	}
