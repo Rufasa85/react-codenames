@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import {Card} from './Card.jsx';
 import {CodemasterBtn} from './CodemasterBtn.jsx';
 import {PlayerBtn} from './PlayerBtn.jsx';
+import{ScoreCounter} from './ScoreCounter.jsx';
 import {cardWords} from './wordList.js';
 
 
@@ -110,7 +111,11 @@ class App extends React.Component {
 		return  (
 			<div>
 				<h1> This is React <CodemasterBtn clickHandler={this.showColors}/><PlayerBtn clickHandler={this.hideColors}/></h1>
+				<ScoreCounter color='Blue' score={9} />
+				<ScoreCounter color='Red' score={8} />
+
 					{words}
+				}
 			</div>
 			)
 	}
