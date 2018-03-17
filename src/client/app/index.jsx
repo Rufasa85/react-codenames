@@ -19,7 +19,11 @@ function shuffleArray(array) {
 
 shuffleArray(cardWords);
 var cardWordObjArr = [];
-
+let coinFlip = Math.floor(Math.random() * 2);
+let bonusColor = 'red';
+if(coinFlip) {
+	bonusColor='blue';
+}
 
 for (var i = 0; i < cardWords.length; i++) {
 	let cardObj = {};
@@ -30,7 +34,7 @@ for (var i = 0; i < cardWords.length; i++) {
 			class: 'card'
 		}
 	}
-	else if (i < 10) {
+	else if (i < 9) {
 		cardObj={
 			color:'blue',
 			word: cardWords[i],
@@ -38,15 +42,15 @@ for (var i = 0; i < cardWords.length; i++) {
 			clicked:false
 		}
 	}
-	else if (i === 10) {
+	else if (i === 9) {
 		cardObj={
-			color:'purple',
+			color:bonusColor,
 			word: cardWords[i],
 			class: 'card',
 			clicked:false
 		}
 	}
-	else if (i < 20) {
+	else if (i < 18) {
 		cardObj={
 			color:'red',
 			word: cardWords[i],
@@ -71,11 +75,22 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state =  {
+			blueScore:8,
+			redScore:8,
 			words:cardWordObjArr
-		}
+		};		
 		this.changeColor = this.changeColor.bind(this);
 		this.showColors = this.showColors.bind(this);
 		this.hideColors = this.hideColors.bind(this);
+	}
+
+	componentWillMount() {
+		if (bonusColor==='red') {
+			this.setState({redScore:9})
+		}
+		else {
+			this.setState({blueScore:9})	
+		}
 	}
 
 	changeColor(e) {
@@ -111,8 +126,8 @@ class App extends React.Component {
 		return  (
 			<div>
 				<h1> This is React <CodemasterBtn clickHandler={this.showColors}/><PlayerBtn clickHandler={this.hideColors}/></h1>
-				<ScoreCounter color='Blue' score={9} />
-				<ScoreCounter color='Red' score={8} />
+				<ScoreCounter color='Blue' score={this.state.blueScore} />
+				<ScoreCounter color='Red' score={this.state.redScore} />
 
 					{words}
 				}
