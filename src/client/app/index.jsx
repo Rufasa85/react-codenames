@@ -136,18 +136,22 @@ class App extends React.Component {
 		return  (
 			<div>
 				<h1> Codenames </h1>
-				<div className ='topFlexBox'>	
-					<div className = 'topFlexItem'>
-						<ScoreCounter color='Blue' score={this.state.blueScore} />
+				<div className ='topFlexBox'>
+					<div className = 'scoreCounterContainer'>	
+						<div className = 'scoreCounter'>
+							<ScoreCounter color='Blue' score={this.state.blueScore} />
+						</div>
+						<div className = 'scoreCounter'>
+							<ScoreCounter color='Red' score={this.state.redScore} />
+						</div>
 					</div>
-					<div className = 'topFlexItem'>
-						<ScoreCounter color='Red' score={this.state.redScore} />
-					</div>
-					<div className = 'topFlexItem'>
-						<CodemasterBtn clickHandler={this.showColors}/>
-					</div>
-					<div className = 'topFlexItem'>
-						<PlayerBtn clickHandler={this.hideColors}/>
+					<div className='btnContainer'>
+						<div className = 'modeBtnContainer'>
+							<CodemasterBtn clickHandler={this.showColors}/>
+						</div>
+						<div className = 'modeBtnContainer'>
+							<PlayerBtn clickHandler={this.hideColors}/>
+						</div>
 					</div>
 				</div>
 				<div className = 'cardsFlexBox'>
