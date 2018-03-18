@@ -60,7 +60,7 @@ for (var i = 0; i < cardWords.length; i++) {
 	}
 	else {
 		cardObj={
-			color:'yellow',
+			color:'white',
 			word: cardWords[i],
 			class: 'card',
 			clicked:false
@@ -108,6 +108,9 @@ class App extends React.Component {
 	showColors() {
 		for (var i = 0; i < this.state.words.length; i++) {
 			this.state.words[i]['class'] = this.state.words[i]['color'] + '-card card';
+			if (this.state.words[i]['clicked']) {
+				this.state.words[i]['class'] = this.state.words[i]['color'] + '-card card clicked-card'
+			}
 		}
 		this.setState({});
 	}
@@ -116,6 +119,9 @@ class App extends React.Component {
 		for (var i = 0; i < this.state.words.length; i++) {
 			if (!this.state.words[i]['clicked']) {
 				this.state.words[i]['class'] = 'card';
+			}
+			else {
+				this.state.words[i]['class'] = this.state.words[i]['color'] + '-card card';
 			}
 		}
 		this.setState({});
@@ -129,12 +135,24 @@ class App extends React.Component {
 		}
 		return  (
 			<div>
-				<h1> This is React <CodemasterBtn clickHandler={this.showColors}/><PlayerBtn clickHandler={this.hideColors}/></h1>
-				<ScoreCounter color='Blue' score={this.state.blueScore} />
-				<ScoreCounter color='Red' score={this.state.redScore} />
-
+				<h1> Codenames </h1>
+				<div className ='topFlexBox'>	
+					<div className = 'topFlexItem'>
+						<ScoreCounter color='Blue' score={this.state.blueScore} />
+					</div>
+					<div className = 'topFlexItem'>
+						<ScoreCounter color='Red' score={this.state.redScore} />
+					</div>
+					<div className = 'topFlexItem'>
+						<CodemasterBtn clickHandler={this.showColors}/>
+					</div>
+					<div className = 'topFlexItem'>
+						<PlayerBtn clickHandler={this.hideColors}/>
+					</div>
+				</div>
+				<div className = 'cardsFlexBox'>
 					{words}
-				}
+				</div>
 			</div>
 			)
 	}

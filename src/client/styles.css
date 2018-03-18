@@ -1,9 +1,36 @@
+body {
+	font-family: 'IBM Plex Mono', monospace;
+	background-color:black;
+	color:white;
+}
+
+.cardsFlexBox {
+	display:flex;
+	flex-wrap:wrap;
+}
+
 .card {
 	height: 100px;
-	width: 100px;
-	border:1px solid green;
 	display: inline-block;
 	width:18%;
+	margin: 5px;
+	border-radius:5px;
+	box-shadow: 2px 4px;
+	display:flex;
+	flex-grow:1;
+	justify-content: center;
+	align-items:center;
+	background-color: brown;
+	font-size:36px;
+	color:white;
+}
+
+.card:hover {
+	opacity:0.5;
+}
+
+.clicked-card {
+	text-decoration: line-through;
 }
 
 .red-card {
@@ -18,10 +45,27 @@
 	background-color: black;
 }
 
-.yellow-card {
-	background-color: yellow;
+.white-card {
+	background-color: gray;
 }
 
-.purple-card {
-	background-color: purple;
+.red-card:hover {
+	opacity:1;
+}
+
+.blue-card:hover {
+	opacity:1;
+}
+
+.black-card:hover {
+	opacity:1;
+}
+
+.white-card:hover {
+	opacity:1;
+}
+
+.topFlexBox {
+	display:flex;
+	justify-content:space-between;
 }
