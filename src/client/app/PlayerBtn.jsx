@@ -3,9 +3,15 @@ import React from 'react';
 export class PlayerBtn extends React.Component {
 	render() {
 		return (
-			<button onClick={this.props.clickHandler}>
-				Player Mode!
-			</button>
+			<div className='modeBtn' onClick={this.props.clickHandler}>
+				<p>Player Mode!</p>
+				<div className='smallBox'></div>
+				<div className='smallBox'></div>
+				<div className='smallBox'></div>
+				<div className='smallBox'></div>
+				<div className='smallBox'></div>
+				<div className='smallBox'></div>
+			</div>
 			)
 	}
 }
