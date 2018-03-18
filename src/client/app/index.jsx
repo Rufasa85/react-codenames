@@ -60,7 +60,7 @@ for (var i = 0; i < cardWords.length; i++) {
 	}
 	else {
 		cardObj={
-			color:'white',
+			color:'gray',
 			word: cardWords[i],
 			class: 'card',
 			clicked:false
