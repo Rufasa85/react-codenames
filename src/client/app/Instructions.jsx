@@ -1,0 +1,13 @@
+import React from 'react';
+
+export class Instructions extends React.Component {
+	render() {
+		return (
+			<div>
+				<h1>How to Play</h1>
+				<p> this will be a description on how to play the game. I will deal with this later. here is some lorem ipusm to fill it out. Lorem ipsum dolor amet whatever tbh keytar lomo you probably haven't heard of them paleo. Four dollar toast PBR&B pitchfork banh mi butcher, tacos kogi paleo pug. Chambray retro sartorial neutra live-edge bitters. Celiac hammock flannel, gentrify godard whatever stumptown twee waistcoat flexitarian cornhole fingerstache. Tacos brooklyn tumblr actually etsy neutra 8-bit cronut tumeric organic lumbersexual knausgaard. Pour-over craft beer cliche, hexagon letterpress meh sriracha ethical 90's viral lyft. Ugh tattooed XOXO, poutine drinking vinegar kogi man braid echo park YOLO fashion axe leggings vexillologist plaid kinfolk. Literally wolf green juice VHS helvetica disrupt cold-pressed trust fund street art hell of 90's cardigan slow-carb semiotics mustache. Raclette disrupt cliche beard. Messenger bag butcher bitters woke mustache, asymmetrical thundercats pickled microdosing poke flexitarian fashion axe crucifix. Venmo DIY snackwave gentrify mumblecore. Marfa locavore microdosing synth, vaporware you probably haven't heard of them sartorial. Williamsburg wolf biodiesel thundercats, schlitz ramps before they sold out try-hard. Drinking vinegar small batch lo-fi, letterpress pitchfork distillery post-ironic craft beer hella helvetica meggings kickstarter aesthetic austin meh. Sustainable roof party kinfolk, fashion axe pour-over leggings pop-up truffaut occupy. Polaroid typewriter actually semiotics, vaporware shabby chic lumbersexual cloud bread keytar hammock banjo selfies VHS. Ethical food truck sartorial, typewriter iceland kickstarter subway tile dreamcatcher bespoke tattooed meditation gluten-free. Everyday carry af gastropub celiac waistcoat gochujang banh mi vegan. XOXO before they sold out mumblecore 8-bit DIY pug scenester. 8-bit keytar drinking vinegar, bicycle rights DIY blue bottle salvia ramps fashion axe whatever. Offal godard kickstarter art party, hot chicken authentic irony post-ironic four dollar toast chicharrones shoreditch taiyaki mumblecore. Vegan prism chicharrones, bushwick before they sold out selfies disrupt put a bird on it pickled mlkshk semiotics wolf fashion axe. Godard craft beer retro subway tile, lumbersexual food truck messenger bag. Everyday carry hot chicken brunch blog, air plant pork belly yr quinoa truffaut heirloom hashtag bespoke kitsch.
+				</p>
+			</div>
+			)
+	}
+}

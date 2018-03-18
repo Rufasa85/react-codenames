@@ -4,6 +4,8 @@ import {Card} from './Card.jsx';
 import {CodemasterBtn} from './CodemasterBtn.jsx';
 import {PlayerBtn} from './PlayerBtn.jsx';
 import{ScoreCounter} from './ScoreCounter.jsx';
+import {Instructions} from './Instructions.jsx';
+import {WinScreen} from './WinScreen.jsx';
 import {cardWords} from './wordList.js';
 
 
@@ -77,7 +79,8 @@ class App extends React.Component {
 		this.state =  {
 			blueScore:8,
 			redScore:8,
-			words:cardWordObjArr
+			words:cardWordObjArr,
+			instruct:false
 		};		
 		this.changeColor = this.changeColor.bind(this);
 		this.showColors = this.showColors.bind(this);
@@ -133,8 +136,19 @@ class App extends React.Component {
 			let wordObj = this.state.words[i];
 			words.push(<Card key = {i} id = {i} class = {wordObj.class} clickHandler={this.changeColor} word = {wordObj.word} />)
 		}
-		return  (
-			<div>
+		let retJsx = null;
+		if (!this.state.blueScore) {
+			retJsx = <WinScreen color='Blue'/>
+		}
+		else if (!this.state.redScore) {
+			retJsx = <WinScreen color='Red'/>
+		}
+		else if (this.state.instruct) {
+			retJsx= <Instructions/>
+		}
+
+		else {
+			retJsx = <div>
 				<h1> Codenames </h1>
 				<div className ='topFlexBox'>
 					<div className = 'scoreCounterContainer'>	
@@ -158,6 +172,9 @@ class App extends React.Component {
 					{words}
 				</div>
 			</div>
+		}
+		return  (
+			retJsx
 			)
 	}
 }
