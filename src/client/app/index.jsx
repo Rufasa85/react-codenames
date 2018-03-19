@@ -6,6 +6,7 @@ import {PlayerBtn} from './PlayerBtn.jsx';
 import{ScoreCounter} from './ScoreCounter.jsx';
 import {Instructions} from './Instructions.jsx';
 import {WinScreen} from './WinScreen.jsx';
+import {TeamTurnTracker} from './TeamTurnTracker.jsx';
 import {cardWords} from './wordList.js';
 
 
@@ -80,7 +81,8 @@ class App extends React.Component {
 			blueScore:8,
 			redScore:8,
 			words:cardWordObjArr,
-			instruct:false
+			instruct:false,
+			team:bonusColor
 		};		
 		this.changeColor = this.changeColor.bind(this);
 		this.showColors = this.showColors.bind(this);
@@ -89,10 +91,10 @@ class App extends React.Component {
 
 	componentWillMount() {
 		if (bonusColor==='red') {
-			this.setState({redScore:9})
+			this.setState({redScore:9, team:'Red'})
 		}
 		else {
-			this.setState({blueScore:9})	
+			this.setState({blueScore:9, team:'Blue'})	
 		}
 	}
 
@@ -149,7 +151,7 @@ class App extends React.Component {
 
 		else {
 			retJsx = <div>
-				<h1> Codenames </h1>
+				<TeamTurnTracker  team = {this.state.team}/>
 				<div className ='topFlexBox'>
 					<div className = 'scoreCounterContainer'>	
 						<div className = 'scoreCounter'>
