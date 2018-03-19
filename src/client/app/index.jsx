@@ -20,12 +20,15 @@ function shuffleArray(array) {
     }
 }
 
+
 shuffleArray(cardWords);
 var cardWordObjArr = [];
 let coinFlip = Math.floor(Math.random() * 2);
 let bonusColor = 'red';
+let blueTeamTurn = false;
 if(coinFlip) {
 	bonusColor='blue';
+	blueTeamTurn=true;
 }
 
 for (var i = 0; i < cardWords.length; i++) {
@@ -82,7 +85,9 @@ class App extends React.Component {
 			redScore:8,
 			words:cardWordObjArr,
 			instruct:false,
-			team:bonusColor
+			team:bonusColor,
+			//adding team boolean for easier control flow with two options
+			blueTeamTurn:true
 		};		
 		this.changeColor = this.changeColor.bind(this);
 		this.showColors = this.showColors.bind(this);
@@ -91,17 +96,35 @@ class App extends React.Component {
 
 	componentWillMount() {
 		if (bonusColor==='red') {
-			this.setState({redScore:9, team:'Red'})
+			this.setState({redScore:9})
 		}
 		else {
-			this.setState({blueScore:9, team:'Blue'})	
+			this.setState({blueScore:9})	
 		}
 	}
 
 	changeColor(e) {
 		let idx = e.target.id;
 		let colorScore = this.state.words[idx]['color'] + 'Score' ;
-		console.log(e.target);
+		if (this.state.words[idx]['color']!=this.state.team) {
+			if (this.state.words[idx]['color']==='black') {
+				if(blueTeamTurn) {
+					this.state.redScore = 0;
+				}
+				else {
+					this.state.blueScore = 0;
+				}
+			}
+			else if(blueTeamTurn && this.state.words[idx]['color'] === 'red' || blueTeamTurn && this.state.words[idx]['color'] === 'gray') {
+				blueTeamTurn = false;
+				this.state.team = 'red';
+			}
+			else if(!blueTeamTurn && this.state.words[idx]['color'] === 'blue' || !blueTeamTurn && this.state.words[idx]['color'] === 'gray') {
+				blueTeamTurn = true;
+				this.state.team = 'blue';
+			}
+
+		}
 		this.state.words[idx]['class'] = this.state.words[idx]['color'] + '-card card';
 		if (!this.state.words[idx]['clicked']) {
 			this.state[colorScore]= this.state[colorScore] - 1;
