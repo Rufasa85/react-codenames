@@ -37,7 +37,9 @@ for (var i = 0; i < cardWords.length; i++) {
 		cardObj={
 			color:'black',
 			word: cardWords[i],
-			class: 'card'
+			class: 'card',
+			clicked:false,
+			clickable:true
 		}
 	}
 	else if (i < 9) {
@@ -45,7 +47,8 @@ for (var i = 0; i < cardWords.length; i++) {
 			color:'blue',
 			word: cardWords[i],
 			class: 'card',
-			clicked:false
+			clicked:false,
+			clickable:true
 		}
 	}
 	else if (i === 9) {
@@ -53,7 +56,8 @@ for (var i = 0; i < cardWords.length; i++) {
 			color:bonusColor,
 			word: cardWords[i],
 			class: 'card',
-			clicked:false
+			clicked:false,
+			clickable:true
 		}
 	}
 	else if (i < 18) {
@@ -61,7 +65,8 @@ for (var i = 0; i < cardWords.length; i++) {
 			color:'red',
 			word: cardWords[i],
 			class: 'card',
-			clicked:false
+			clicked:false,
+			clickable:true
 		}
 	}
 	else {
@@ -69,7 +74,8 @@ for (var i = 0; i < cardWords.length; i++) {
 			color:'gray',
 			word: cardWords[i],
 			class: 'card',
-			clicked:false
+			clicked:false,
+			clickable:true
 		}
 	}
 	cardWordObjArr.push(cardObj);
@@ -106,36 +112,39 @@ class App extends React.Component {
 	changeColor(e) {
 		let idx = e.target.id;
 		let colorScore = this.state.words[idx]['color'] + 'Score' ;
-		if (this.state.words[idx]['color']!=this.state.team) {
-			if (this.state.words[idx]['color']==='black') {
-				if(blueTeamTurn) {
-					this.state.redScore = 0;
+		if (this.state.words[idx]['clickable']) {
+			if (this.state.words[idx]['color']!=this.state.team) {
+				if (this.state.words[idx]['color']==='black') {
+					if(blueTeamTurn) {
+						this.state.redScore = 0;
+					}
+					else {
+						this.state.blueScore = 0;
+					}
 				}
-				else {
-					this.state.blueScore = 0;
+				else if(blueTeamTurn && this.state.words[idx]['color'] === 'red' || blueTeamTurn && this.state.words[idx]['color'] === 'gray') {
+					blueTeamTurn = false;
+					this.state.team = 'red';
+				}
+				else if(!blueTeamTurn && this.state.words[idx]['color'] === 'blue' || !blueTeamTurn && this.state.words[idx]['color'] === 'gray') {
+					blueTeamTurn = true;
+					this.state.team = 'blue';
 				}
 			}
-			else if(blueTeamTurn && this.state.words[idx]['color'] === 'red' || blueTeamTurn && this.state.words[idx]['color'] === 'gray') {
-				blueTeamTurn = false;
-				this.state.team = 'red';
+			this.state.words[idx]['class'] = this.state.words[idx]['color'] + '-card card';
+			this.state.words[idx]['clickable'] = false;
+			if (!this.state.words[idx]['clicked']) {
+				this.state[colorScore]= this.state[colorScore] - 1;
 			}
-			else if(!blueTeamTurn && this.state.words[idx]['color'] === 'blue' || !blueTeamTurn && this.state.words[idx]['color'] === 'gray') {
-				blueTeamTurn = true;
-				this.state.team = 'blue';
-			}
-
+			this.state.words[idx]['clicked'] = true;
+			this.setState({});
 		}
-		this.state.words[idx]['class'] = this.state.words[idx]['color'] + '-card card';
-		if (!this.state.words[idx]['clicked']) {
-			this.state[colorScore]= this.state[colorScore] - 1;
-		}
-		this.state.words[idx]['clicked'] = true;
-		this.setState({});
 	}
 
 	showColors() {
 		for (var i = 0; i < this.state.words.length; i++) {
 			this.state.words[i]['class'] = this.state.words[i]['color'] + '-card card';
+			this.state.words[i]['clickable'] = false;
 			if (this.state.words[i]['clicked']) {
 				this.state.words[i]['class'] = this.state.words[i]['color'] + '-card card clicked-card'
 			}
@@ -147,6 +156,7 @@ class App extends React.Component {
 		for (var i = 0; i < this.state.words.length; i++) {
 			if (!this.state.words[i]['clicked']) {
 				this.state.words[i]['class'] = 'card';
+				this.state.words[i]['clickable']=true;
 			}
 			else {
 				this.state.words[i]['class'] = this.state.words[i]['color'] + '-card card';
