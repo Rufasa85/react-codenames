@@ -5,6 +5,7 @@ import {CodemasterBtn} from './CodemasterBtn.jsx';
 import {PlayerBtn} from './PlayerBtn.jsx';
 import{ScoreCounter} from './ScoreCounter.jsx';
 import {InstructionsButton} from './InstructionsButton.jsx';
+import {InstructionsHideButton} from './InstructionsHideButton.jsx';
 import {Instructions} from './Instructions.jsx';
 import {WinScreen} from './WinScreen.jsx';
 import {TeamTurnTracker} from './TeamTurnTracker.jsx';
@@ -97,6 +98,7 @@ class App extends React.Component {
 			blueTeamTurn:true
 		};		
 		this.showInstructions = this.showInstructions.bind(this);
+		this.hideInstructions = this.hideInstructions.bind(this);
 		this.changeColor = this.changeColor.bind(this);
 		this.showColors = this.showColors.bind(this);
 		this.hideColors = this.hideColors.bind(this);
@@ -114,6 +116,11 @@ class App extends React.Component {
 	showInstructions(e) {
 		e.preventDefault();
 		this.setState({instruct:true})
+	}
+
+	hideInstructions(e) {
+		e.preventDefault();
+		this.setState({instruct:false})
 	}
 
 	changeColor(e) {
@@ -186,7 +193,11 @@ class App extends React.Component {
 			retJsx = <WinScreen color='Red'/>
 		}
 		else if (this.state.instruct) {
-			retJsx= <Instructions/>
+			retJsx = 
+			<div>
+				<InstructionsHideButton clickHandler={this.hideInstructions}/>
+				<Instructions/>
+			</div>
 		}
 
 		else {
