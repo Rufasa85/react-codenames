@@ -9,6 +9,7 @@ import {InstructionsHideButton} from './InstructionsHideButton.jsx';
 import {Instructions} from './Instructions.jsx';
 import {WinScreen} from './WinScreen.jsx';
 import {TeamTurnTracker} from './TeamTurnTracker.jsx';
+import {NewGameButton} from './NewGameButton.jsx';
 import {cardWords} from './wordList.js';
 
 
@@ -102,6 +103,7 @@ class App extends React.Component {
 		this.changeColor = this.changeColor.bind(this);
 		this.showColors = this.showColors.bind(this);
 		this.hideColors = this.hideColors.bind(this);
+		this.newGame = this.newGame.bind(this);
 	}
 
 	componentWillMount() {
@@ -179,6 +181,10 @@ class App extends React.Component {
 		this.setState({});
 	}
 
+	newGame() {
+		window.location.reload()
+	}
+
 	render() {
 		let words = [];
 		for (var i = 0; i < 25; i++) {
@@ -187,10 +193,18 @@ class App extends React.Component {
 		}
 		let retJsx = null;
 		if (!this.state.blueScore) {
-			retJsx = <WinScreen color='Blue'/>
+			retJsx = 
+			<div>
+				<NewGameButton clickHandler={this.newGame}/>
+				<WinScreen color='Blue'/>
+			</div>
 		}
 		else if (!this.state.redScore) {
-			retJsx = <WinScreen color='Red'/>
+			retJsx = 
+			<div>
+				<NewGameButton clickHandler={this.newGame}/>
+				<WinScreen color='Red'/>
+			</div>
 		}
 		else if (this.state.instruct) {
 			retJsx = 
