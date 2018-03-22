@@ -4,9 +4,13 @@ import {Card} from './Card.jsx';
 import {CodemasterBtn} from './CodemasterBtn.jsx';
 import {PlayerBtn} from './PlayerBtn.jsx';
 import{ScoreCounter} from './ScoreCounter.jsx';
+import {InstructionsButton} from './InstructionsButton.jsx';
+import {InstructionsHideButton} from './InstructionsHideButton.jsx';
 import {Instructions} from './Instructions.jsx';
 import {WinScreen} from './WinScreen.jsx';
 import {TeamTurnTracker} from './TeamTurnTracker.jsx';
+import {NewGameButton} from './NewGameButton.jsx';
+import{EndTurnButton} from './EndTurnButton.jsx';
 import {cardWords} from './wordList.js';
 
 
@@ -95,18 +99,35 @@ class App extends React.Component {
 			//adding team boolean for easier control flow with two options
 			blueTeamTurn:true
 		};		
+		this.showInstructions = this.showInstructions.bind(this);
+		this.hideInstructions = this.hideInstructions.bind(this);
 		this.changeColor = this.changeColor.bind(this);
 		this.showColors = this.showColors.bind(this);
 		this.hideColors = this.hideColors.bind(this);
+		this.endTurn = this.endTurn.bind(this);
+		this.newGame = this.newGame.bind(this);
 	}
 
 	componentWillMount() {
 		if (bonusColor==='red') {
-			this.setState({redScore:9})
+			this.setState({
+				redScore:9,
+				blueTeamTurn:false
+			})
 		}
 		else {
 			this.setState({blueScore:9})	
 		}
+	}
+
+	showInstructions(e) {
+		e.preventDefault();
+		this.setState({instruct:true})
+	}
+
+	hideInstructions(e) {
+		e.preventDefault();
+		this.setState({instruct:false})
 	}
 
 	changeColor(e) {
@@ -141,6 +162,22 @@ class App extends React.Component {
 		}
 	}
 
+	endTurn(e) {
+		e.preventDefault();
+		if (this.state.blueTeamTurn) {
+			this.setState({
+				blueTeamTurn:false,
+				team:'red'
+			})
+		}
+		else {
+			this.setState({
+				blueTeamTurn:true,
+				team:'blue'
+			})
+		}
+	}
+
 	showColors() {
 		for (var i = 0; i < this.state.words.length; i++) {
 			this.state.words[i]['class'] = this.state.words[i]['color'] + '-card card';
@@ -165,6 +202,10 @@ class App extends React.Component {
 		this.setState({});
 	}
 
+	newGame() {
+		window.location.reload()
+	}
+
 	render() {
 		let words = [];
 		for (var i = 0; i < 25; i++) {
@@ -173,18 +214,32 @@ class App extends React.Component {
 		}
 		let retJsx = null;
 		if (!this.state.blueScore) {
-			retJsx = <WinScreen color='Blue'/>
+			retJsx = 
+			<div>
+				<NewGameButton clickHandler={this.newGame}/>
+				<WinScreen color='Blue'/>
+			</div>
 		}
 		else if (!this.state.redScore) {
-			retJsx = <WinScreen color='Red'/>
+			retJsx = 
+			<div>
+				<NewGameButton clickHandler={this.newGame}/>
+				<WinScreen color='Red'/>
+			</div>
 		}
 		else if (this.state.instruct) {
-			retJsx= <Instructions/>
+			retJsx = 
+			<div>
+				<InstructionsHideButton clickHandler={this.hideInstructions}/>
+				<Instructions/>
+			</div>
 		}
 
 		else {
 			retJsx = <div>
+				<InstructionsButton clickHandler = {this.showInstructions}/>
 				<TeamTurnTracker  team = {this.state.team}/>
+				<EndTurnButton clickHandler={this.endTurn}/>
 				<div className ='topFlexBox'>
 					<div className = 'scoreCounterContainer'>	
 						<div className = 'scoreCounter'>
