@@ -10,6 +10,7 @@ import {Instructions} from './Instructions.jsx';
 import {WinScreen} from './WinScreen.jsx';
 import {TeamTurnTracker} from './TeamTurnTracker.jsx';
 import {NewGameButton} from './NewGameButton.jsx';
+import{EndTurnButton} from './EndTurnButton.jsx';
 import {cardWords} from './wordList.js';
 
 
@@ -103,12 +104,16 @@ class App extends React.Component {
 		this.changeColor = this.changeColor.bind(this);
 		this.showColors = this.showColors.bind(this);
 		this.hideColors = this.hideColors.bind(this);
+		this.endTurn = this.endTurn.bind(this);
 		this.newGame = this.newGame.bind(this);
 	}
 
 	componentWillMount() {
 		if (bonusColor==='red') {
-			this.setState({redScore:9})
+			this.setState({
+				redScore:9,
+				blueTeamTurn:false
+			})
 		}
 		else {
 			this.setState({blueScore:9})	
@@ -154,6 +159,22 @@ class App extends React.Component {
 			}
 			this.state.words[idx]['clicked'] = true;
 			this.setState({});
+		}
+	}
+
+	endTurn(e) {
+		e.preventDefault();
+		if (this.state.blueTeamTurn) {
+			this.setState({
+				blueTeamTurn:false,
+				team:'red'
+			})
+		}
+		else {
+			this.setState({
+				blueTeamTurn:true,
+				team:'blue'
+			})
 		}
 	}
 
@@ -218,6 +239,7 @@ class App extends React.Component {
 			retJsx = <div>
 				<InstructionsButton clickHandler = {this.showInstructions}/>
 				<TeamTurnTracker  team = {this.state.team}/>
+				<EndTurnButton clickHandler={this.endTurn}/>
 				<div className ='topFlexBox'>
 					<div className = 'scoreCounterContainer'>	
 						<div className = 'scoreCounter'>
