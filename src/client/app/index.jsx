@@ -4,6 +4,7 @@ import {Card} from './Card.jsx';
 import {CodemasterBtn} from './CodemasterBtn.jsx';
 import {PlayerBtn} from './PlayerBtn.jsx';
 import{ScoreCounter} from './ScoreCounter.jsx';
+import {InstructionsButton} from './InstructionsButton.jsx';
 import {Instructions} from './Instructions.jsx';
 import {WinScreen} from './WinScreen.jsx';
 import {TeamTurnTracker} from './TeamTurnTracker.jsx';
@@ -95,6 +96,7 @@ class App extends React.Component {
 			//adding team boolean for easier control flow with two options
 			blueTeamTurn:true
 		};		
+		this.showInstructions = this.showInstructions.bind(this);
 		this.changeColor = this.changeColor.bind(this);
 		this.showColors = this.showColors.bind(this);
 		this.hideColors = this.hideColors.bind(this);
@@ -107,6 +109,11 @@ class App extends React.Component {
 		else {
 			this.setState({blueScore:9})	
 		}
+	}
+
+	showInstructions(e) {
+		e.preventDefault();
+		this.setState({instruct:true})
 	}
 
 	changeColor(e) {
@@ -184,6 +191,7 @@ class App extends React.Component {
 
 		else {
 			retJsx = <div>
+				<InstructionsButton clickHandler = {this.showInstructions}/>
 				<TeamTurnTracker  team = {this.state.team}/>
 				<div className ='topFlexBox'>
 					<div className = 'scoreCounterContainer'>	
