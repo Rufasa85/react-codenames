@@ -237,9 +237,13 @@ class App extends React.Component {
 
 		else {
 			retJsx = <div>
-				<InstructionsButton clickHandler = {this.showInstructions}/>
 				<TeamTurnTracker  team = {this.state.team}/>
-				<EndTurnButton clickHandler={this.endTurn}/>
+				<div className = 'instEndBtnContainer'>
+					<InstructionsButton clickHandler = {this.showInstructions}/>
+				</div>
+				<div className = 'instEndBtnContainer'>
+					<EndTurnButton clickHandler={this.endTurn}/>
+				</div>
 				<div className ='topFlexBox'>
 					<div className = 'scoreCounterContainer'>	
 						<div className = 'scoreCounter'>

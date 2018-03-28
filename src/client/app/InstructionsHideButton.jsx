@@ -3,7 +3,7 @@ import React from 'react';
 export class InstructionsHideButton extends React.Component {
 	render () {
 		return (
-			<button onClick={this.props.clickHandler}>Back to Game!</button>
+			<div className = 'otherButtons' onClick={this.props.clickHandler}><h4>Back to Game!</h4></div>
 		)
 	}
 }

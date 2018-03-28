@@ -3,7 +3,7 @@ import React from 'react';
 export class NewGameButton extends React.Component {
 	render() {
 		return (
-				<button onClick={this.props.clickHandler}>New Game</button>
+				<div className='otherButtons' onClick={this.props.clickHandler}><h4>New Game</h4></div>
 			)
 	}
 }
