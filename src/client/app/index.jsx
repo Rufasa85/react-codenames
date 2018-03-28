@@ -217,14 +217,20 @@ class App extends React.Component {
 			retJsx = 
 			<div>
 				<NewGameButton clickHandler={this.newGame}/>
-				<WinScreen color='Blue'/>
+				<WinScreen picSrc = "https://images.pexels.com/photos/461170/pexels-photo-461170.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=320&w=213" color='Blue'/>
+				<div className='cardsFlexBox'>
+					{words}
+				</div>
 			</div>
 		}
 		else if (!this.state.redScore) {
 			retJsx = 
 			<div>
 				<NewGameButton clickHandler={this.newGame}/>
-				<WinScreen color='Red'/>
+				<WinScreen picSrc = "https://images.pexels.com/photos/941693/pexels-photo-941693.jpeg?auto=compress&cs=tinysrgb&h=325&w=470" color='Red'/>
+				<div className = 'cardsFlexBox'>
+					{words}
+				</div>
 			</div>
 		}
 		else if (this.state.instruct) {
