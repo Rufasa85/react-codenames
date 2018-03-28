@@ -45,6 +45,7 @@ for (var i = 0; i < cardWords.length; i++) {
 			clicked:false,
 			clickable:true
 		}
+		cardWordObjArr.push(cardObj)
 	}
 	else if (i < 9) {
 		cardObj={
@@ -54,6 +55,7 @@ for (var i = 0; i < cardWords.length; i++) {
 			clicked:false,
 			clickable:true
 		}
+		cardWordObjArr.push(cardObj)
 	}
 	else if (i === 9) {
 		cardObj={
@@ -63,6 +65,7 @@ for (var i = 0; i < cardWords.length; i++) {
 			clicked:false,
 			clickable:true
 		}
+		cardWordObjArr.push(cardObj)
 	}
 	else if (i < 18) {
 		cardObj={
@@ -72,8 +75,9 @@ for (var i = 0; i < cardWords.length; i++) {
 			clicked:false,
 			clickable:true
 		}
+		cardWordObjArr.push(cardObj)
 	}
-	else {
+	else if (i<25){
 		cardObj={
 			color:'gray',
 			word: cardWords[i],
@@ -81,8 +85,9 @@ for (var i = 0; i < cardWords.length; i++) {
 			clicked:false,
 			clickable:true
 		}
+		cardWordObjArr.push(cardObj)
 	}
-	cardWordObjArr.push(cardObj);
+
 }
 
 shuffleArray(cardWordObjArr);
